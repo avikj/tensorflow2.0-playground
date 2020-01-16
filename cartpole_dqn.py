@@ -109,10 +109,8 @@ def define_q_network(STATE_DIM, NUM_ACTIONS):
 					target: a target value for the Q-value estimates
 			"""
 
-			ind = tf.transpose(tf.stack([tf.range(tf.shape(s)[0]), a]))
-			sample_losses = (tf.reduce_sum(self.call(s)*tf.one_hot(a, NUM_ACTIONS), axis=1)-target)**2
-
-			return tf.reduce_mean(sample_losses)
+			q_estimate = tf.reduce_sum(self.call(s)*tf.one_hot(a, NUM_ACTIONS), axis=1)
+			return tf.reduce_mean((q_estimate-target)**2)
 
 
 		@tf.function(input_signature=[
