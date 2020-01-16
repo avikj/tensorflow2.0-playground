@@ -4,9 +4,9 @@ import pdb
 
 def define_q_network(STATE_DIM, NUM_ACTIONS):
 	"""
-		Defines a QNetwork class for continuous state, discrete action
-		RL environments with hardwired state dimension and action 
-		count.
+		Defines a Q-network class for continuous state, discrete action
+		RL environments, with state dimension and action count hardwired
+		into the class.
 
 		This wrapper is required in order to include input signatures for 
 		methods of the Q-network class which are decorated with tf.function
@@ -14,8 +14,9 @@ def define_q_network(STATE_DIM, NUM_ACTIONS):
 
 	class QNetwork(tf.keras.Model):
 		"""
-			A fully connected neural network for modeling Q-functions 
-			in a RL environment.
+			A fully connected neural network for modeling a Q-function
+			in a RL environment with continuous state and discrete 
+			actions.
 
 			The network takes a state as input and outputs a vector of
 			Q-value estimates for the state and each action.
@@ -246,7 +247,7 @@ if __name__ == '__main__':
 		# c.
 		loss = q_net.train_step(s, a, target)
 
-		
+
 		if VERBOSE:
 			print(f"Iter: {i}, Q-Net batch loss: {loss}, Current episode duration: {t}, Longest episode so far: {longest_ep_duration}, eps: {EPS}")
 
